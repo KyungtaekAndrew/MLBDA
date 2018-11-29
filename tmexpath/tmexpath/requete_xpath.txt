@@ -1,0 +1,21 @@
+
+Q14)
+//ville[not(contains(//restaurant[@etoile=3]/@ville,@nom))]
+//ville[not(@nom=//restaurant[@etoile=3]/@ville)]
+
+Q15)
+a) //ville[count(plusBeauMonument)=0]
+b) //restaurant[@ville = //ville[count(plusBeauMonument)=0]/@nom]
+
+Q16)
+//restaurant[menu[not(@prix > //restaurant[@nom="Les 4 saisons"]/menu/@prix)] and @nom != "Les 4 saisons"]
+
+Q17)
+//ville[@nom=//restaurant[@etoile = 3 and @ville = following-sibling::*[@etoile = 3]/@ville]/@ville]
+
+Q18)
+//restaurant[menu[contains(@nom,'salade')]/@prix != menu[contains(@nom,'salade')]/@prix ]
+
+Q19)
+//@prix[following::@prix != @prix]
+
