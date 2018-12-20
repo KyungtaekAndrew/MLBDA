@@ -1,0 +1,32 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX f: <http://www.cems.uwe.ac.uk/empdept/concept/>
+PREFIX : <http://www.abc.org/>
+
+#Q1
+#SELECT ?emp ?job 
+#WHERE {
+#  {?emp f:Job ?job}
+#}
+#order by desc(?emp)
+
+#Q2
+#select ?surN
+#where{
+#  {?emp a f:emp}
+#  .
+#  {?emp foaf:surname ?surN}
+#}
+#order by ?emp
+#limit 3
+
+#Q3
+select ?surN ?sal
+where{
+  {?emp foaf:surname ?surN}
+  .
+  {?emp f:Sal ?sal}
+}
+order by desc(?sal)
+limit 3

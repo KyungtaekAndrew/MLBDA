@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE xs:schema SYSTEM "XMLSchema.dtd">
+
+<!-- A Compléter :
+
+NOM 1:KIM
+Prenom 1: Kyungtaek
+
+NOM 2:
+Prenom 2:
+
+Groupe:
+Binome:
+
+
+Le schéma du guide touristique. La déclaration des éléments doit être imbriquée  
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="base">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+	<xs:element name="restaurant" type="infoRestaurant"/>
+	<xs:element name="ville" type="infoVille"/>
+      </xs:choice>
+    </xs:complexType>
+    <xs:key name="cleVille">
+      <xs:selector xpath="ville" />
+      <xs:field xpath="@nom"/>
+    </xs:key>
+    <xs:keyref name="villeResto" refer="cleVille">
+      <xs:selector xpath="restaurant"/>
+      <xs:field xpath="@ville"/>
+    </xs:keyref>
+  </xs:element>
+
+  <xs:complexType name="infoRestaurant">
+    <xs:sequence>
+      <xs:element name="fermeture" type="xs:string" minOccurs="0"/>
+      <xs:element name="menu" maxOccurs="unbounded" minOccurs="2">
+	<xs:complexType>
+	  <xs:attribute name="nom" type="xs:string"/>
+	  <xs:attribute name="prix" type="xs:positiveInteger"/>
+	</xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="nom" type="xs:string"/>
+    <xs:attribute name="etoile">
+      <xs:simpleType>
+	<xs:restriction base="xs:integer">
+	  <xs:minInclusive value="0"/>
+	  <xs:maxInclusive value="3"/>
+	</xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ville" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="infoVille">
+    <xs:sequence>
+      <xs:element name="plusBeauMonument" minOccurs="0">
+	<xs:complexType>
+	  <xs:attribute name="nom" type="xs:string"/>
+	  <xs:attribute name="tarif" type="xs:integer"/>
+	</xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="nom" type="xs:string"/>
+    <xs:attribute name="departement" type="xs:integer"/>
+  </xs:complexType>
+
+
+</xs:schema>

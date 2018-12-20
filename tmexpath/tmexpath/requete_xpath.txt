@@ -17,5 +17,5 @@ Q18)
 //restaurant[menu[contains(@nom,'salade')]/@prix != menu[contains(@nom,'salade')]/@prix ]
 
 Q19)
-//@prix[following::@prix != @prix]
+//menu[@prix != following::*/@prix]
 

@@ -1,0 +1,109 @@
+base <http://example.org>
+prefix foaf: <http://xmlns.com/foaf/0.1/> 
+prefix rel: <http://www.perceive.net/schemas/relationship/> 
+prefix : <http://example.org/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix univ: <http://www.faculty.ac> 
+
+#Q3
+#SELECT DISTINCT ?city
+#WHERE
+#{
+ # {?univ :locatedAt ?city}
+ # UNION
+ # {?per :livesIn ?city}
+#}
+
+#Q4
+#Select distinct ?child
+#where{
+#  {
+#  {?child :hasMother ?mom}
+#  .
+#  {?mom :studiedAt ?univMom}
+#  .
+#  {?child :studiedAt ?univ}.
+#  Filter(?univ = ?univMom)
+#  }
+#  Union
+#  {
+#  {?child :hasFather ?papa}
+#  .
+#  {?papa :studiedAt ?univPapa}
+#  {?child :studiedAt ?univ}.
+#  Filter(?univ = ?univPapa)    
+#  }
+#}
+
+#Q5
+#select distinct ?child
+#where{
+#  {?child :hasMother ?mom}
+#  .
+#  {?child :hasFather ?papa}
+#  .
+#  {?mom :studiedAt ?univMom}
+#  .
+#  {?papa :studiedAt ?univPapa}
+#  .
+#  {?child :studiedAt ?univ}
+#  .
+#  Filter(?univ = ?univMom && ?univ = ?univPapa)
+#}
+
+#Q6
+#select distinct ?child
+#where{
+#  {?child :hasMother ?mom}
+#  .
+#  {?child :hasFather ?papa}
+#  .
+#  {?mom :studiedAt ?univMom}
+#  .
+#  {?papa :studiedAt ?univPapa}
+#  .
+#  {?child :studiedAt ?univ}
+#  .
+#  Filter(?univ != ?univMom && ?univ != ?univPapa)
+#}
+
+#Q7
+#select distinct ?per ?univ
+#where{
+#  {?per :studiedAt ?univ}
+#  .
+#  {?per :hasBrother ?bro}
+#}
+
+#Q8
+#select distinct ?person
+#where{
+#  {?person :studiedAt ?univ}
+#  .
+#  {?univ :locatedAt ?cityU}
+#  .
+#  {?person :livesIn ?cityP}
+#  .
+#  filter(?cityU != ?cityP)
+#}
+
+#Q9
+#select distinct ?indirectF
+#where{
+#  {
+#    {?directA :friend ?li}
+#    .
+#    {?directA :friend ?indirectF}
+#    .
+#    filter(?li = :liz && ?indirectF != :liz)
+#  }
+#  union
+#  {
+#    {?li :friend ?directA}
+#    .
+#    {?directA :friend ?indirectF}
+#    .
+#    filter(?li = :liz && ?indirectF != :liz)
+#  }
+#}
+
